@@ -59,7 +59,8 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 		graphics.setColor(Color.BLACK);
 		graphics.drawString(xName, left + 5, top - 5);
 		int textY = bottom + 15;
-		graphics.drawString(yName, right - 10, textY);
+		int offset = 10;
+		graphics.drawString(yName, right - offset, textY);
 		graphics.drawLine(left, top, left, bottom);
 		graphics.drawLine(left, bottom, right, bottom);
 		if (data.size() == 0) return image;
@@ -74,7 +75,7 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 					Data oneData = data.get(i);
 					int columnSize = (int) (oneData.value * proportion);
 					int x = (int) (left + i * columnWidth + 1);
-					graphics.fillRect(x + 10,
+					graphics.fillRect(x + offset,
 							bottom - columnSize,
 							(int) columnWidth,
 							columnSize);
@@ -83,6 +84,16 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 				}
 				break;
 			case LineChart:
+				if (data.size() == 1) break;
+				Data lastData = data.get(0);
+				for (int i = 1; i < data.size(); i++) {
+					graphics.setColor(colors[i % colors.length]);
+					Data oneData = data.get(i);
+					oneData.drawLineChart(graphics, i, bottom, left, offset, proportion, columnWidth, lastData);
+					graphics.setColor(Color.BLACK);
+					graphics.drawString(oneData.name, (int) (left + (i - 1) * columnWidth + 1), textY);
+					lastData = oneData;
+				}
 				break;
 		}
 		double maxValueDivideBy5 = maxValue / 5.0;
@@ -123,12 +134,15 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 	public static void main(@NotNull String @NotNull ... args) {
 		new Drawer<>("国家", "胜利数")
 //				.writeToFile("rendered.png", 512, 512);
-				.column(new SimpleData(10, "中国"))
+				.column(new SimpleData(9, "中国"))
 				.column(new SimpleData(2, "德国"))
 				.column(new SimpleData(5, "朝鲜"))
 				.column(new SimpleData(8, "日本"))
 				.column(new SimpleData(0, "零点"))
+				.column(new SimpleData(3, "WTF"))
 				.mode(Mode.Histogram)
+				.showInWindow(512, 512)
+				.mode(Mode.LineChart)
 				.showInWindow(512, 512);
 	}
 }
