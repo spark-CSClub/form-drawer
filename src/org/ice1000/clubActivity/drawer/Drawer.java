@@ -65,7 +65,7 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 		graphics.drawLine(left, bottom, right, bottom);
 		if (data.size() == 0) return image;
 		int maxValue = 0;
-		for (Data datum : data) if (datum.value > maxValue) maxValue = datum.value;
+		for (Data datum : data) if (datum.maxValue() > maxValue) maxValue = datum.maxValue();
 		double proportion = (bottom - top) / (double) maxValue;
 		double columnWidth = (right - left - 10.0) / data.size();
 		switch (mode) {

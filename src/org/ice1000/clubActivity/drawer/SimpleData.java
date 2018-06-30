@@ -4,10 +4,21 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
+/**
+ * @author ice1000
+ */
 @SuppressWarnings("WeakerAccess")
 public class SimpleData extends AbstractData<@NotNull SimpleData> {
-	public SimpleData(int value, String name) {
-		super(value, name);
+	public int value;
+
+	public SimpleData(int value, @NotNull String name) {
+		super(name);
+		this.value = value;
+	}
+
+	@Override
+	public int maxValue() {
+		return value;
 	}
 
 	@Override

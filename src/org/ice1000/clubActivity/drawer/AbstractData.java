@@ -4,17 +4,22 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
+/**
+ * @author ice1000
+ */
+@SuppressWarnings("WeakerAccess")
 public abstract class AbstractData<@NotNull Data extends @NotNull AbstractData<@NotNull Data>> {
-	public int value;
 	public @NotNull String name;
 
-	public AbstractData(int value, @NotNull String name) {
-		this.value = value;
+	public AbstractData(@NotNull String name) {
 		this.name = name;
 	}
 
+	public abstract int maxValue();
+
 	public abstract void drawHistogram(@NotNull Graphics2D graphics,
-	                                   Color[] colors, int index,
+	                                   @NotNull Color @NotNull [] colors,
+	                                   int index,
 	                                   int bottom,
 	                                   int left,
 	                                   int offset,
@@ -22,7 +27,8 @@ public abstract class AbstractData<@NotNull Data extends @NotNull AbstractData<@
 	                                   double columnWidth);
 
 	public abstract void drawLineChart(@NotNull Graphics2D graphics,
-	                                   Color[] colors, int index,
+	                                   @NotNull Color @NotNull [] colors,
+	                                   int index,
 	                                   int bottom,
 	                                   int left,
 	                                   int offset,
