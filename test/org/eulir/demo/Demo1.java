@@ -5,11 +5,12 @@ import org.ice1000.clubActivity.drawer.Mode;
 import org.ice1000.clubActivity.drawer.SimpleData;
 import org.jetbrains.annotations.NotNull;
 
-public class Demo1
-{
+/**
+ * @author eulir
+ */
+public class Demo1 {
 	//World Cup 2018 Group A
-	public static void main(@NotNull String @NotNull ... args)
-	{
+	public static void main(@NotNull String @NotNull ... args) {
 		new Drawer<>("Wins", "Country")
 				.column(new SimpleData("Brazil", 2))
 				.column(new SimpleData("Croatia", 1))
