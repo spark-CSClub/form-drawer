@@ -12,12 +12,14 @@ public class SimpleData extends AbstractData<@NotNull SimpleData> {
 
 	@Override
 	public void drawHistogram(@NotNull Graphics2D graphics,
+	                          @NotNull Color @NotNull [] colors,
 	                          int index,
 	                          int bottom,
 	                          int left,
 	                          int offset,
 	                          double columnSize,
 	                          double columnWidth) {
+		graphics.setColor(colors[index % colors.length]);
 		int x = (int) (left + index * columnWidth + 1);
 		graphics.fillRect(x + offset,
 				(int) (bottom - columnSize),
@@ -27,6 +29,7 @@ public class SimpleData extends AbstractData<@NotNull SimpleData> {
 
 	@Override
 	public void drawLineChart(@NotNull Graphics2D graphics,
+	                          @NotNull Color @NotNull [] colors,
 	                          int index,
 	                          int bottom,
 	                          int left,
@@ -34,6 +37,7 @@ public class SimpleData extends AbstractData<@NotNull SimpleData> {
 	                          double proportion,
 	                          double columnWidth,
 	                          @NotNull SimpleData lastData) {
+		graphics.setColor(colors[index % colors.length]);
 		int columnSize = (int) (value * proportion);
 		int lastColumnSize = (int) (lastData.value * proportion);
 		int x = (int) (left + (index - 1) * columnWidth + 1);

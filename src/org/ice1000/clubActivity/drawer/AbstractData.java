@@ -14,7 +14,7 @@ public abstract class AbstractData<@NotNull Data extends @NotNull AbstractData<@
 	}
 
 	public abstract void drawHistogram(@NotNull Graphics2D graphics,
-	                                   int index,
+	                                   Color[] colors, int index,
 	                                   int bottom,
 	                                   int left,
 	                                   int offset,
@@ -22,7 +22,7 @@ public abstract class AbstractData<@NotNull Data extends @NotNull AbstractData<@
 	                                   double columnWidth);
 
 	public abstract void drawLineChart(@NotNull Graphics2D graphics,
-	                                   int index,
+	                                   Color[] colors, int index,
 	                                   int bottom,
 	                                   int left,
 	                                   int offset,

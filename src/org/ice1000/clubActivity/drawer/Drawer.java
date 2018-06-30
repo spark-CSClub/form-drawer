@@ -71,9 +71,8 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 		switch (mode) {
 			case Histogram:
 				for (int i = 0; i < data.size(); i++) {
-					graphics.setColor(colors[i % colors.length]);
 					Data oneData = data.get(i);
-					oneData.drawHistogram(graphics, i, bottom, left, offset, proportion, columnWidth);
+					oneData.drawHistogram(graphics, colors, i, bottom, left, offset, proportion, columnWidth);
 					graphics.setColor(Color.BLACK);
 					graphics.drawString(oneData.name, (int) (left + i * columnWidth + 1), textY);
 				}
@@ -82,9 +81,8 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 				if (data.size() == 1) break;
 				Data lastData = data.get(0);
 				for (int i = 1; i < data.size(); i++) {
-					graphics.setColor(colors[i % colors.length]);
 					Data oneData = data.get(i);
-					oneData.drawLineChart(graphics, i, bottom, left, offset, proportion, columnWidth, lastData);
+					oneData.drawLineChart(graphics, colors, i, bottom, left, offset, proportion, columnWidth, lastData);
 					graphics.setColor(Color.BLACK);
 					graphics.drawString(oneData.name, (int) (left + (i - 1) * columnWidth + 1), textY);
 					lastData = oneData;
