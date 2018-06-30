@@ -5,6 +5,8 @@ import org.ice1000.clubActivity.drawer.Mode;
 import org.ice1000.clubActivity.drawer.SimpleData;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
+
 /**
  * @author eulir
  */
@@ -19,6 +21,7 @@ public class Demo1 {
 				.mode(Mode.Histogram)
 				.showInWindow(512, 512)
 				.mode(Mode.LineChart)
+				.font(new Font("Microsoft YaHei", Font.PLAIN, 16))
 				.showInWindow(512, 512);
 		new Drawer<>("Losses", "Country")
 				.column(new SimpleData("Brazil", 0))
