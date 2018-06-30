@@ -1,62 +1,38 @@
 package org.eulir.demo;
 
-import org.ice1000.clubActivity.drawer.Drawer;
-import org.ice1000.clubActivity.drawer.LayeredData;
-import org.ice1000.clubActivity.drawer.Mode;
-import org.ice1000.clubActivity.drawer.SimpleData;
+import org.ice1000.clubActivity.drawer.*;
 import org.jetbrains.annotations.NotNull;
 
-public class Demo2
-{
+public class Demo2 {
 	//2017-2018 NBA Western Conference
 
 	private static final int totalGames = 82;
 
-	public static void main(@NotNull String @NotNull ... args)
-	{
-		new Drawer<>("Wins", "Team")
-				.column(new SimpleData("Rockets", 67))
-				.column(new SimpleData("Warriors", 58))
-				.column(new SimpleData("Trail Blazers", 49))
-				.column(new SimpleData("Thunders", 48))
-				.column(new SimpleData("Jazz", 48))
-				.column(new SimpleData("Pelicans", 48))
-				.column(new SimpleData("Spurs", 47))
-				.column(new SimpleData("Timberwolves", 47))
-				.column(new SimpleData("Nuggets", 46))
-				.column(new SimpleData("Clippers", 42))
-				.column(new SimpleData("Lakers", 35))
-				.column(new SimpleData("Kings", 27))
-				.column(new SimpleData("Mavericks", 24))
-				.column(new SimpleData("Grizzlies", 22))
-				.column(new SimpleData("Suns", 21))
+	public static void main(@NotNull String @NotNull ... args) {
+		createWinsDrawer()
 				.mode(Mode.Histogram)
-				.showInWindow(1200, 1200)
+				.showInWindow(1200, 1200);
+		createWinsDrawer()
 				.mode(Mode.LineChart)
 				.showInWindow(1200, 1200);
 
-		new Drawer<>("Losses", "Team")
-				.column(new SimpleData("Rockets", totalGames - 67))
-				.column(new SimpleData("Warriors", totalGames - 58))
-				.column(new SimpleData("Trail Blazers", totalGames - 49))
-				.column(new SimpleData("Thunders", totalGames - 48))
-				.column(new SimpleData("Jazz", totalGames - 48))
-				.column(new SimpleData("Pelicans", totalGames - 48))
-				.column(new SimpleData("Spurs", totalGames - 47))
-				.column(new SimpleData("Timberwolves", totalGames - 47))
-				.column(new SimpleData("Nuggets", totalGames - 46))
-				.column(new SimpleData("Clippers", totalGames - 42))
-				.column(new SimpleData("Lakers", totalGames - 35))
-				.column(new SimpleData("Kings", totalGames - 27))
-				.column(new SimpleData("Mavericks", totalGames - 24))
-				.column(new SimpleData("Grizzlies", totalGames - 22))
-				.column(new SimpleData("Suns", totalGames - 21))
+		createLossesDrawer()
 				.mode(Mode.Histogram)
-				.showInWindow(1200, 1200)
+				.showInWindow(1200, 1200);
+		createLossesDrawer()
 				.mode(Mode.LineChart)
 				.showInWindow(1200, 1200);
 
-		new Drawer<>("Records", "Team")
+		createRecordsDrawer()
+				.mode(Mode.Histogram)
+				.showInWindow(1200, 1200);
+		createRecordsDrawer()
+				.mode(Mode.LineChart)
+				.showInWindow(1200, 1200);
+	}
+
+	private static @NotNull Drawer<@NotNull AbstractData> createRecordsDrawer() {
+		return new Drawer<>("Records", "Team")
 				.column(new LayeredData("Rockets", totalGames - 67, 67))
 				.column(new LayeredData("Warriors", totalGames - 58, 58))
 				.column(new LayeredData("Trail Blazers", totalGames - 49, 49))
@@ -71,10 +47,57 @@ public class Demo2
 				.column(new LayeredData("Kings", totalGames - 27, 27))
 				.column(new LayeredData("Mavericks", totalGames - 24, 24))
 				.column(new LayeredData("Grizzlies", totalGames - 22, 22))
-				.column(new LayeredData("Suns", totalGames - 21, 21))
-				.mode(Mode.Histogram)
-				.showInWindow(1200, 1200)
-				.mode(Mode.LineChart)
-				.showInWindow(1200, 1200);
+				.column(new LayeredData("Suns", totalGames - 21, 21));
+	}
+
+	private static @NotNull Drawer<@NotNull AbstractData> createLossesDrawer() {
+		return createDrawer("Losses",
+				totalGames - 67,
+				totalGames - 58,
+				totalGames - 49,
+				totalGames - 48,
+				totalGames - 47,
+				totalGames - 46,
+				totalGames - 42,
+				totalGames - 35,
+				totalGames - 27,
+				totalGames - 24,
+				totalGames - 22,
+				totalGames - 21);
+	}
+
+	private static @NotNull Drawer<@NotNull AbstractData> createWinsDrawer() {
+		return createDrawer("Wins", 67, 58, 49, 48, 47, 46, 42, 35, 27, 24, 22, 21);
+	}
+
+	private static @NotNull Drawer<@NotNull AbstractData> createDrawer(String wins,
+	                                                                   int i,
+	                                                                   int i2,
+	                                                                   int i3,
+	                                                                   int i4,
+	                                                                   int i5,
+	                                                                   int i6,
+	                                                                   int i7,
+	                                                                   int i8,
+	                                                                   int i9,
+	                                                                   int i10,
+	                                                                   int i11,
+	                                                                   int i12) {
+		return new Drawer<>(wins, "Team")
+				.column(new SimpleData("Rockets", i))
+				.column(new SimpleData("Warriors", i2))
+				.column(new SimpleData("Trail Blazers", i3))
+				.column(new SimpleData("Thunders", i4))
+				.column(new SimpleData("Jazz", i4))
+				.column(new SimpleData("Pelicans", i4))
+				.column(new SimpleData("Spurs", i5))
+				.column(new SimpleData("Timberwolves", i5))
+				.column(new SimpleData("Nuggets", i6))
+				.column(new SimpleData("Clippers", i7))
+				.column(new SimpleData("Lakers", i8))
+				.column(new SimpleData("Kings", i9))
+				.column(new SimpleData("Mavericks", i10))
+				.column(new SimpleData("Grizzlies", i11))
+				.column(new SimpleData("Suns", i12));
 	}
 }
