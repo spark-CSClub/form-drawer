@@ -12,10 +12,10 @@ import java.util.ArrayList;
  * @author ice1000
  */
 @SuppressWarnings({"WeakerAccess", "UnusedReturnValue"})
-public class Drawer {
+public class Drawer<Data extends AbstractData> {
 	private final String xName;
 	private final String yName;
-	private ArrayList<OneData> data;
+	private ArrayList<Data> data;
 	private Mode mode;
 	private Color[] colors;
 
@@ -24,7 +24,7 @@ public class Drawer {
 		this.yName = yName;
 		data = new ArrayList<>();
 		mode = Mode.Histogram;
-		colors = new Color[]{Color.BLUE, Color.CYAN, Color.RED, Color.GREEN, Color.YELLOW};
+		colors = new Color[]{Color.BLUE, Color.ORANGE, Color.GREEN, Color.RED, Color.CYAN, Color.YELLOW};
 	}
 
 	public Drawer writeToFile(String fileName, int width, int height) {
@@ -42,7 +42,7 @@ public class Drawer {
 		return this;
 	}
 
-	public Drawer column(OneData height) {
+	public <AnyData extends Data> Drawer column(AnyData height) {
 		data.add(height);
 		return this;
 	}
@@ -63,18 +63,23 @@ public class Drawer {
 		if (data.size() == 0) return image;
 		switch (mode) {
 			case Histogram:
-				int columnWidth = (right - left) / data.size();
+				double columnWidth = (right - left - 10.0) / data.size();
 				int maxValue = 0;
-				for (OneData datum : data) if (datum.value > maxValue) maxValue = datum.value;
+				for (Data datum : data) if (datum.value > maxValue) maxValue = datum.value;
 				double proportion = (height >>> 1) / (double) maxValue;
+				int maxValueDivideBy5 = maxValue / 5;
+				for (int i = 0; i < 5; i++) {
+					graphics.drawString(String.valueOf(maxValueDivideBy5), left + 1,
+							(float) (top + maxValueDivideBy5 + proportion));
+				}
 				for (int i = 0; i < data.size(); i++) {
 					graphics.setColor(colors[i % colors.length]);
-					OneData oneData = data.get(i);
+					Data oneData = data.get(i);
 					int columnSize = (int) (oneData.value * proportion) + top;
-					int x = left + i * columnWidth + 1;
-					graphics.fillRect(x,
+					int x = (int) (left + i * columnWidth + 1);
+					graphics.fillRect(x + 10,
 							bottom - columnSize,
-							columnWidth,
+							(int) columnWidth,
 							columnSize);
 					graphics.setColor(Color.BLACK);
 					graphics.drawString(oneData.name, x, textY);
@@ -110,12 +115,12 @@ public class Drawer {
 	}
 
 	public static void main(String... args) {
-		new Drawer("国家", "胜利数")
+		new Drawer<>("国家", "胜利数")
 //				.writeToFile("rendered.png", 512, 512);
-				.column(new OneData(10, "中国"))
-				.column(new OneData(2, "德国"))
-				.column(new OneData(5, "朝鲜"))
-				.column(new OneData(8, "日本"))
+				.column(new SimpleData(10, "中国"))
+				.column(new SimpleData(2, "德国"))
+				.column(new SimpleData(5, "朝鲜"))
+				.column(new SimpleData(8, "日本"))
 				.mode(Mode.Histogram)
 				.showInWindow(512, 512);
 	}
