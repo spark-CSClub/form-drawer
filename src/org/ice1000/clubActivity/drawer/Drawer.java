@@ -60,6 +60,9 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 		int top = height >>> 3;
 		int bottom = height - top;
 		graphics.setColor(Color.BLACK);
+		graphics.drawString("Preview (this text won't be displayed when exporting as image), " + width + " x " + height,
+				2,
+				height - 20);
 		graphics.drawString(yName, left + 5, top - 5);
 		int textY = bottom + 15;
 		int offset = 10;
@@ -105,19 +108,19 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 	}
 
 	public @NotNull Drawer<Data> showInWindow(int width, int height) {
-		BufferedImage render = render(width, height);
 		new JFrame("Rendered Image Preview") {{
 			setLayout(new BorderLayout());
 			add(new JComponent() {
 				@Override
 				protected void paintComponent(Graphics g) {
-					g.drawImage(render, 0, 0, width, height, this);
+					g.drawImage(render(getWidth(), getHeight()), 0, 0, getWidth(), getHeight(), this);
 					super.paintComponent(g);
 				}
 			}, BorderLayout.CENTER);
 			pack();
 			setSize(width, height);
 			setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			setResizable(true);
 		}}.setVisible(true);
 		return this;
 	}

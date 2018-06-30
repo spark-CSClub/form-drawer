@@ -13,23 +13,37 @@ import java.awt.*;
 public class Demo1 {
 	//World Cup 2018 Group A
 	public static void main(@NotNull String @NotNull ... args) {
+		String fontName = "Ubuntu";
 		new Drawer<>("Wins", "Country")
 				.column(new SimpleData("Brazil", 2))
 				.column(new SimpleData("Croatia", 1))
 				.column(new SimpleData("Mexico", 2))
 				.column(new SimpleData("Cameroon", 0))
+				.font(new Font(fontName, Font.PLAIN, 16))
 				.mode(Mode.Histogram)
-				.showInWindow(512, 512)
+				.showInWindow(512, 512);
+		new Drawer<>("Wins", "Country")
+				.column(new SimpleData("Brazil", 2))
+				.column(new SimpleData("Croatia", 1))
+				.column(new SimpleData("Mexico", 2))
+				.column(new SimpleData("Cameroon", 0))
+				.font(new Font(fontName, Font.PLAIN, 16))
 				.mode(Mode.LineChart)
-				.font(new Font("Microsoft YaHei", Font.PLAIN, 16))
 				.showInWindow(512, 512);
 		new Drawer<>("Losses", "Country")
 				.column(new SimpleData("Brazil", 0))
 				.column(new SimpleData("Croatia", 2))
 				.column(new SimpleData("Mexico", 0))
 				.column(new SimpleData("Cameroon", 3))
+				.font(new Font(fontName, Font.PLAIN, 16))
 				.mode(Mode.Histogram)
-				.showInWindow(512, 512)
+				.showInWindow(512, 512);
+		new Drawer<>("Losses", "Country")
+				.column(new SimpleData("Brazil", 0))
+				.column(new SimpleData("Croatia", 2))
+				.column(new SimpleData("Mexico", 0))
+				.column(new SimpleData("Cameroon", 3))
+				.font(new Font(fontName, Font.PLAIN, 16))
 				.mode(Mode.LineChart)
 				.showInWindow(512, 512);
 	}
