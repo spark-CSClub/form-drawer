@@ -123,32 +123,4 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 		this.mode = mode;
 		return this;
 	}
-
-	public static void main(@NotNull String @NotNull ... args) {
-		new Drawer<>("国家", "胜利数")
-//				.writeToFile("rendered.png", 512, 512);
-				.column(new SimpleData("中国", 9))
-				.column(new SimpleData("德国", 2))
-				.column(new SimpleData("朝鲜", 5))
-				.column(new SimpleData("日本", 8))
-				.column(new SimpleData("零点", 0))
-				.column(new SimpleData("WTF", 3))
-				.mode(Mode.Histogram)
-				.showInWindow(512, 512)
-				.mode(Mode.LineChart)
-				.showInWindow(512, 512);
-
-		new Drawer<>("国家", "进球数")
-//				.writeToFile("rendered.png", 512, 512);
-				.column(new LayeredData("中国", 34, 5, 45))
-				.column(new LayeredData("德国", 32, 1, 21))
-				.column(new LayeredData("朝鲜", 11, 3, 13))
-				.column(new LayeredData("日本", 23, 1, 31))
-				.column(new LayeredData("零点", 0, 0, 0))
-				.column(new LayeredData("WTF", 43, 1, 31))
-				.mode(Mode.Histogram)
-				.showInWindow(512, 512)
-				.mode(Mode.LineChart)
-				.showInWindow(512, 512);
-	}
 }
