@@ -57,10 +57,10 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 		int top = height >>> 3;
 		int bottom = height - top;
 		graphics.setColor(Color.BLACK);
-		graphics.drawString(xName, left + 5, top - 5);
+		graphics.drawString(yName, left + 5, top - 5);
 		int textY = bottom + 15;
 		int offset = 10;
-		graphics.drawString(yName, right - offset, textY);
+		graphics.drawString(xName, right - offset, textY);
 		graphics.drawLine(left, top, left, bottom);
 		graphics.drawLine(left, bottom, right, bottom);
 		if (data.size() == 0) return image;
