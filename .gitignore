@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+.idea
+*.iml
+*.jar
+*.zip
+*.png
+out
+build
+.gradle
