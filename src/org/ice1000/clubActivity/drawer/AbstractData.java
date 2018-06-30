@@ -13,6 +13,14 @@ public abstract class AbstractData<@NotNull Data extends @NotNull AbstractData<@
 		this.name = name;
 	}
 
+	public abstract void drawHistogram(@NotNull Graphics2D graphics,
+	                                   int index,
+	                                   int bottom,
+	                                   int left,
+	                                   int offset,
+	                                   double columnSize,
+	                                   double columnWidth);
+
 	public abstract void drawLineChart(@NotNull Graphics2D graphics,
 	                                   int index,
 	                                   int bottom,
@@ -20,5 +28,5 @@ public abstract class AbstractData<@NotNull Data extends @NotNull AbstractData<@
 	                                   int offset,
 	                                   double columnSize,
 	                                   double columnWidth,
-	                                   @NotNull Data lastColumnSize);
+	                                   @NotNull Data lastData);
 }

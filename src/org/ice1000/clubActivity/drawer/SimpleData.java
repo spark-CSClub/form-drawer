@@ -11,6 +11,21 @@ public class SimpleData extends AbstractData<@NotNull SimpleData> {
 	}
 
 	@Override
+	public void drawHistogram(@NotNull Graphics2D graphics,
+	                          int index,
+	                          int bottom,
+	                          int left,
+	                          int offset,
+	                          double columnSize,
+	                          double columnWidth) {
+		int x = (int) (left + index * columnWidth + 1);
+		graphics.fillRect(x + offset,
+				(int) (bottom - columnSize),
+				(int) columnWidth,
+				(int) columnSize);
+	}
+
+	@Override
 	public void drawLineChart(@NotNull Graphics2D graphics,
 	                          int index,
 	                          int bottom,

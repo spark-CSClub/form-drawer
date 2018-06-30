@@ -73,14 +73,9 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 				for (int i = 0; i < data.size(); i++) {
 					graphics.setColor(colors[i % colors.length]);
 					Data oneData = data.get(i);
-					int columnSize = (int) (oneData.value * proportion);
-					int x = (int) (left + i * columnWidth + 1);
-					graphics.fillRect(x + offset,
-							bottom - columnSize,
-							(int) columnWidth,
-							columnSize);
+					oneData.drawHistogram(graphics, i, bottom, left, offset, proportion, columnWidth);
 					graphics.setColor(Color.BLACK);
-					graphics.drawString(oneData.name, x, textY);
+					graphics.drawString(oneData.name, (int) (left + i * columnWidth + 1), textY);
 				}
 				break;
 			case LineChart:
