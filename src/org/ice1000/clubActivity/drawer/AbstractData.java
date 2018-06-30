@@ -23,7 +23,7 @@ public abstract class AbstractData<@NotNull Data extends @NotNull AbstractData<@
 	                                   int bottom,
 	                                   int left,
 	                                   int offset,
-	                                   double columnSize,
+	                                   double proportion,
 	                                   double columnWidth);
 
 	public abstract void drawLineChart(@NotNull Graphics2D graphics,

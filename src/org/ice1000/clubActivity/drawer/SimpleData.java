@@ -9,9 +9,9 @@ import java.awt.*;
  */
 @SuppressWarnings("WeakerAccess")
 public class SimpleData extends AbstractData<@NotNull SimpleData> {
-	public int value;
+	private int value;
 
-	public SimpleData(int value, @NotNull String name) {
+	public SimpleData(@NotNull String name, int value) {
 		super(name);
 		this.value = value;
 	}
@@ -28,14 +28,15 @@ public class SimpleData extends AbstractData<@NotNull SimpleData> {
 	                          int bottom,
 	                          int left,
 	                          int offset,
-	                          double columnSize,
+	                          double proportion,
 	                          double columnWidth) {
+		int columnSize = (int) (value * proportion);
 		graphics.setColor(colors[index % colors.length]);
 		int x = (int) (left + index * columnWidth + 1);
 		graphics.fillRect(x + offset,
-				(int) (bottom - columnSize),
-				(int) columnWidth,
-				(int) columnSize);
+				bottom - columnSize,
+				(int) columnWidth - 5,
+				columnSize);
 	}
 
 	@Override
