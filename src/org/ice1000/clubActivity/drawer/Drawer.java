@@ -1,6 +1,7 @@
 package org.ice1000.clubActivity.drawer;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 	private @NotNull ArrayList<@NotNull Data> data;
 	private @NotNull Mode mode;
 	private @NotNull Color @NotNull [] colors;
+	private @Nullable Font font;
 
 	public Drawer(@NotNull String xName, @NotNull String yName) {
 		this.xName = xName;
@@ -52,6 +54,7 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 	private @NotNull BufferedImage render(int width, int height) {
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D graphics = image.createGraphics();
+		if (font != null) graphics.setFont(font);
 		int left = width >>> 3;
 		int right = width - left;
 		int top = height >>> 3;
@@ -121,6 +124,11 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 
 	public @NotNull Drawer<Data> mode(@NotNull Mode mode) {
 		this.mode = mode;
+		return this;
+	}
+
+	public @NotNull Drawer<Data> font(@NotNull Font font) {
+		this.font = font;
 		return this;
 	}
 }
