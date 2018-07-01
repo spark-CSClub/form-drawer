@@ -14,7 +14,7 @@ import java.awt.*;
  * @author EULIR
  */
 public class Demo1 {
-	private static final String fontName = "Ubuntu";
+	private static final String fontName = "Linux".equals(System.getProperty("os.name")) ? "Ubuntu" : "Microsoft YaHei";
 
 	//World Cup 2018 Group A
 	public static void main(@NotNull String @NotNull ... args) {
