@@ -20,15 +20,17 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 	private final @NotNull String yName;
 	private @NotNull ArrayList<@NotNull Data> data;
 	private @NotNull Mode mode;
+	private @NotNull String graphName;
 	private @NotNull Color @NotNull [] colors;
 	private @Nullable Font font;
 
-	public Drawer(@NotNull String xName, @NotNull String yName) {
+	public Drawer(@NotNull String xName, @NotNull String yName, @NotNull String graphName) {
 		this.xName = xName;
 		this.yName = yName;
+		this.graphName = graphName;
 		data = new ArrayList<>();
 		mode = Mode.Histogram;
-		colors = new Color[]{Color.BLUE, Color.ORANGE, Color.RED, Color.CYAN, Color.YELLOW};
+		colors = new Color[]{Color.BLUE, Color.ORANGE, Color.RED, Color.CYAN, Color.YELLOW, Color.LIGHT_GRAY};
 	}
 
 	public @NotNull Drawer<Data> writeToFile(@NotNull String fileName, int width, int height) {
@@ -62,7 +64,8 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 		graphics.setColor(Color.BLACK);
 		graphics.drawString("Preview (this text won't be displayed when exporting as image), " + width + " x " + height,
 				2,
-				height - 20);
+				height - 10);
+		graphics.drawString(graphName, 100, height - 25);
 		graphics.drawString(yName, left + 5, top - 5);
 		int textY = bottom + 15;
 		int offset = 10;

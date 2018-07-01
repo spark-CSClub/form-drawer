@@ -3,11 +3,14 @@ package org.eulir.demo;
 import org.ice1000.clubActivity.drawer.*;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author EULIR
+ * @author ice1000
+ */
 public class Demo2 {
-	//2017-2018 NBA Western Conference
-
 	private static final int totalGames = 82;
 
+	//2017-2018 NBA Western Conference
 	public static void main(@NotNull String @NotNull ... args) {
 		createWinsDrawer()
 				.mode(Mode.Histogram)
@@ -32,7 +35,7 @@ public class Demo2 {
 	}
 
 	private static @NotNull Drawer<@NotNull AbstractData> createRecordsDrawer() {
-		return new Drawer<>("Records", "Team")
+		return new Drawer<>("Team", "Records", "2017-2018 NBA Western Conference Records")
 				.column(new LayeredData("Rockets", totalGames - 67, 67))
 				.column(new LayeredData("Warriors", totalGames - 58, 58))
 				.column(new LayeredData("Trail Blazers", totalGames - 49, 49))
@@ -83,7 +86,7 @@ public class Demo2 {
 	                                                                   int i10,
 	                                                                   int i11,
 	                                                                   int i12) {
-		return new Drawer<>(wins, "Team")
+		return new Drawer<>("Team", wins, "2017-2018 NBA Western Conference" + wins)
 				.column(new SimpleData("Rockets", i))
 				.column(new SimpleData("Warriors", i2))
 				.column(new SimpleData("Trail Blazers", i3))

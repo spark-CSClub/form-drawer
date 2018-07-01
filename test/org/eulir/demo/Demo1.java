@@ -10,10 +10,11 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.*;
 
 /**
- * @author eulir
+ * @author ice1000
+ * @author EULIR
  */
 public class Demo1 {
-	public static final String fontName = "Ubuntu";
+	private static final String fontName = "Ubuntu";
 
 	//World Cup 2018 Group A
 	public static void main(@NotNull String @NotNull ... args) {
@@ -33,17 +34,17 @@ public class Demo1 {
 
 	@Contract(pure = true)
 	private static @NotNull Drawer<@NotNull AbstractData> createDrawer2() {
-		return new Drawer<>("Losses", "Country")
+		return new Drawer<>("Country", "Losses", "World Cup 2018 Group A Loss balls")
+				.font(new Font(fontName, Font.PLAIN, 16))
 				.column(new SimpleData("Brazil", 0))
 				.column(new SimpleData("Croatia", 2))
 				.column(new SimpleData("Mexico", 0))
-				.column(new SimpleData("Cameroon", 3))
-				.font(new Font(fontName, Font.PLAIN, 16));
+				.column(new SimpleData("Cameroon", 3));
 	}
 
 	@Contract(pure = true)
 	private static @NotNull Drawer<@NotNull AbstractData> createDrawer() {
-		return new Drawer<>("Wins", "Country")
+		return new Drawer<>("Country", "Wins", "World Cup 2018 Group A Winning balls")
 				.font(new Font(fontName, Font.PLAIN, 16))
 				.column(new SimpleData("Brazil", 2))
 				.column(new SimpleData("Croatia", 1))
