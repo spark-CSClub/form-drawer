@@ -20,14 +20,14 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 	private final @NotNull String yName;
 	private @NotNull ArrayList<@NotNull Data> data;
 	private @NotNull Mode mode;
-	private @NotNull String graphName;
+	private @NotNull String title;
 	private @NotNull Color @NotNull [] colors;
 	private @Nullable Font font;
 
-	public Drawer(@NotNull String xName, @NotNull String yName, @NotNull String graphName) {
+	public Drawer(@NotNull String xName, @NotNull String yName, @NotNull String title) {
 		this.xName = xName;
 		this.yName = yName;
-		this.graphName = graphName;
+		this.title = title;
 		data = new ArrayList<>();
 		mode = Mode.Histogram;
 		colors = new Color[]{Color.BLUE, Color.ORANGE, Color.RED, Color.CYAN, Color.YELLOW, Color.LIGHT_GRAY};
@@ -70,7 +70,7 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 			graphics.drawString("Preview (this text won't be displayed when exporting as image), " + width + " x " + height,
 					2,
 					height - 10);
-		graphics.drawString(graphName, left + 20, top - 25);
+		graphics.drawString(title, left + 20, top - 25);
 		graphics.drawString(yName, left + 5, top - 5);
 		int textY = bottom + 15;
 		int offset = 10;
