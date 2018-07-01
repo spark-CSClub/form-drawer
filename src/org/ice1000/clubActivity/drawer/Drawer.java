@@ -38,7 +38,7 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 	}
 
 	public @NotNull Drawer<Data> writeToFile(@NotNull File file, int width, int height) {
-		BufferedImage image = render(width, height);
+		BufferedImage image = render(width, height, false);
 
 		try {
 			ImageIO.write(image, "PNG", file);
@@ -54,6 +54,10 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 	}
 
 	private @NotNull BufferedImage render(int width, int height) {
+		return render(width, height, true);
+	}
+
+	private @NotNull BufferedImage render(int width, int height, boolean isPreview) {
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
 		Graphics2D graphics = image.createGraphics();
 		if (font != null) graphics.setFont(font);
@@ -62,10 +66,11 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 		int top = height >>> 3;
 		int bottom = height - top;
 		graphics.setColor(Color.BLACK);
-		graphics.drawString("Preview (this text won't be displayed when exporting as image), " + width + " x " + height,
-				2,
-				height - 10);
-		graphics.drawString(graphName, 100, height - 25);
+		if (isPreview)
+			graphics.drawString("Preview (this text won't be displayed when exporting as image), " + width + " x " + height,
+					2,
+					height - 10);
+		graphics.drawString(graphName, left + 20, top - 25);
 		graphics.drawString(yName, left + 5, top - 5);
 		int textY = bottom + 15;
 		int offset = 10;
