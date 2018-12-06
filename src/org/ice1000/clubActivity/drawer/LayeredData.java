@@ -12,27 +12,27 @@ import java.util.Arrays;
 public class LayeredData extends AbstractData<@NotNull LayeredData> {
 	private class Layer implements Comparable<Layer> {
 		int index;
-		int value;
+		double value;
 
 		@Override
 		public int compareTo(@NotNull LayeredData.Layer o) {
-			return value - o.value;
+			return Double.compare(value, o.value);
 		}
 
-		public Layer(int index, int value) {
+		public Layer(int index, double value) {
 			this.index = index;
 			this.value = value;
 		}
 	}
 
 	private @NotNull Layer @NotNull [] values;
-	private int maxValue;
+	private double maxValue;
 
-	public LayeredData(@NotNull String name, int... rawValues) {
+	public LayeredData(@NotNull String name, double... rawValues) {
 		super(name);
 		values = new Layer[rawValues.length];
 		for (int i = 0; i < rawValues.length; i++) {
-			int val = rawValues[i];
+			double val = rawValues[i];
 			if (val > maxValue) maxValue = val;
 			values[i] = new Layer(i, val);
 		}
@@ -40,7 +40,7 @@ public class LayeredData extends AbstractData<@NotNull LayeredData> {
 	}
 
 	@Override
-	public int maxValue() {
+	public double maxValue() {
 		return maxValue;
 	}
 

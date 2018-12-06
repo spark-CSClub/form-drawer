@@ -23,6 +23,7 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 	private @NotNull String title;
 	private @NotNull Color @NotNull [] colors;
 	private @Nullable Font font;
+	private double yStart = 0;
 
 	public Drawer(@NotNull String xName, @NotNull String yName, @NotNull String title) {
 		this.xName = xName;
@@ -67,7 +68,7 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 		int bottom = height - top;
 		graphics.setColor(Color.BLACK);
 		if (isPreview)
-			graphics.drawString("Preview (this text won't be displayed when exporting as image), " + width + " x " + height,
+			graphics.drawString("Preview (this text won't be exported in the image), " + width + " x " + height,
 					2,
 					height - 10);
 		graphics.drawString(title, left + 20, top - 25);
@@ -78,9 +79,9 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 		graphics.drawLine(left, top, left, bottom);
 		graphics.drawLine(left, bottom, right, bottom);
 		if (data.size() == 0) return image;
-		int maxValue = 0;
+		double maxValue = 0;
 		for (Data datum : data) if (datum.maxValue() > maxValue) maxValue = datum.maxValue();
-		double proportion = (bottom - top) / (double) maxValue;
+		double proportion = (bottom - top) / maxValue;
 		double columnWidth = (right - left - 10.0) / data.size();
 		switch (mode) {
 			case Histogram:
@@ -105,13 +106,18 @@ public class Drawer<@NotNull Data extends @NotNull AbstractData> {
 		}
 		double maxValueDivideBy5 = maxValue / 5.0;
 		for (int i = 0; i < 5; i++)
-			graphics.drawString(String.valueOf(maxValueDivideBy5 * i), left + 1,
+			graphics.drawString(String.valueOf((float) (maxValueDivideBy5 * i + yStart)), left + 1,
 					(float) (bottom - maxValueDivideBy5 * i * proportion));
 		return image;
 	}
 
 	public @NotNull Drawer<Data> colors(@NotNull Color @NotNull ... colors) {
 		this.colors = colors;
+		return this;
+	}
+
+	public @NotNull Drawer<Data> yStart(double newStart) {
+		this.yStart = newStart;
 		return this;
 	}
 

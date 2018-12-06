@@ -15,7 +15,7 @@ public abstract class AbstractData<@NotNull Data extends @NotNull AbstractData<@
 		this.name = name;
 	}
 
-	public abstract int maxValue();
+	public abstract double maxValue();
 
 	public abstract void drawHistogram(@NotNull Graphics2D graphics,
 	                                   @NotNull Color @NotNull [] colors,
